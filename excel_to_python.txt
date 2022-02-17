@@ -1,0 +1,25 @@
+import pandas as pd
+
+#df = pd.read_excel("C:/users/user/zxcv.xlsx", engine = "openpyxl", header=1)  
+
+
+
+
+#how to read excel file on python
+#pd.read_excel is the function to read excel file
+#C:/users/user/zxcv.xlsx is that where is the file and what is file name
+
+
+
+
+#print(df)
+
+#----------------------------------------------------------------------------------------------------------------------
+
+df = pd.read_excel("C:/users/user/zxcv.xlsx", engine = "openpyxl", header = 3) 
+
+#header is where I start to read
+
+print(df)
+
+#----------------------------------------------------------------------------------------------------------------------
