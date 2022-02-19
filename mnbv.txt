@@ -1,0 +1,35 @@
+#로짓(logit, 결과값,y)를  softmax를 취해주면 각 결과값이 확률로서 도출된다.
+
+
+
+
+import tensorflow as tf
+import numpy as np
+
+xy = np.loadtxt('data-04-zoo.csv', delimiter = ',', dtype = np.float32)
+x_data = xy[:, 0:-1]
+y_data = xy[:, [-1]]
+
+nb_classes = 7
+
+X = tf.compat.v1.placeholder(tf.float32, [None, 16])
+Y = tf.compat.v1.placeholder(tf.int32, [None, 1])
+
+Y_one_hot = tf.one_hot(Y, nb_classes)
+Y_one_hot = tf.reshape(Y_one_hot, [-1, nb_classes])
+
+W = tf.Variable(tf.random.normal([16, nb_classes]), name = 'weight')
+b = tf.Variable(tf.random.normal([nb_classes]), name = 'bias')
+
+logits = tf.matmul(X,W) + b
+hypothesis = tf.nn.softmax(logits)
+
+cost_i = tf.nn.softmax_cross_entropy_with_logits_v2(logits = logits, labels = Y_one_hot)
+
+cost = tf.reduce_mean(cost_i)
+optimizer = tf.compat.v1.train.GradientDescentOptimizer(learning_rate = 0.1).minimize(cost)
+
+
+
+
+#코드가 너무 낡아서 텐서플로우 1.14로도 안 돌아가는 것들이 있어서 조금 수정함
